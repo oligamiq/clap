@@ -344,9 +344,9 @@ fn complete_arg_value(
             clap::ValueHint::ExecutablePath => {
                 #[cfg(not(all(target_os = "wasi", target_env = "p1")))]
                 use is_executable::IsExecutable;
-                cfg(not(all(target_os = "wasi", target_env = "p1")))
+                #[cfg(not(all(target_os = "wasi", target_env = "p1")))]
                 values.extend(complete_path(value_os, current_dir, &|p| p.is_executable()));
-                cfg(all(target_os = "wasi", target_env = "p1"))
+                #[cfg(all(target_os = "wasi", target_env = "p1"))]
                 values.extend(complete_path(value_os, current_dir, &|p| false));
             }
             clap::ValueHint::CommandName
